@@ -1,0 +1,21 @@
+```{r, echo = FALSE}
+shinyApp(
+  ui = fluidPage(
+    titlePanel("Character Name"),
+    sidebarLayout(
+      sidebarPanel(
+        div(tags$table(tags$tr(tags$td(strong("Str")), tags$td(actionButton("StrUp", label = "+")), tags$td(actionButton("StrDown", label="-"))),
+              tags$tr(tags$td(strong("Sta")), tags$td(actionButton("StaUp", label = "+")), tags$td(actionButton("StaDown", label="-"))),
+              tags$tr(tags$td(strong("Dex")), tags$td(actionButton("DexUp", label = "+")), tags$td(actionButton("DexDown", label="-"))),
+              tags$tr(tags$td(strong("Int")), tags$td(actionButton("IntUp", label = "+")), tags$td(actionButton("Intdown", label="-"))),
+              tags$tr(tags$td(strong("Wiz")), tags$td(actionButton("WizUp", label = "+")), tags$td(actionButton("WizDown", label="-"))),
+              tags$tr(tags$td(strong("Cha")), tags$td(actionButton("ChaUp", label = "+")), tags$td(actionButton("ChaDown", label="-")))
+        )
+      )),
+      mainPanel()
+    )
+  ),
+  server = function(input, output){},
+  options = list(width="100%", height="700")
+  )
+```
