@@ -1,0 +1,4 @@
+#!/usr/bin/Rscript --vanilla
+library("rmarkdown")
+rmarkdown::run("DnD.Rmd")
+
