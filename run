@@ -1,4 +1,3 @@
-#!/usr/bin/Rscript --vanilla
-library("rmarkdown")
-rmarkdown::run("DnD.Rmd")
+Rscript --vanilla -e 'library(rmarkdown);options(shiny.port=8888);rmarkdown::run("'$1'")' &
+chrome http://127.0.0.1:8888/$1 &
 

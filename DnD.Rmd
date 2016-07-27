@@ -14,8 +14,8 @@ shinyApp(
               tags$tr(tags$td(strong("Int")), tags$td(actionButton("IntUp", label = "+")), tags$td(actionButton("Intdown", label="-"))),
               tags$tr(tags$td(strong("Wiz")), tags$td(actionButton("WizUp", label = "+")), tags$td(actionButton("WizDown", label="-"))),
               tags$tr(tags$td(strong("Cha")), tags$td(actionButton("ChaUp", label = "+")), tags$td(actionButton("ChaDown", label="-")))
-        )
-      )),
+        ))
+      ),
       mainPanel()
     )
   ),

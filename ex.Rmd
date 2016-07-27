@@ -1,0 +1,36 @@
+---
+runtime: shiny
+output: html_document
+---
+```{r, echo = FALSE}
+library(yaml)
+outname <- "ex.yaml"
+
+fields <- c("name")
+
+get_yaml <- function(){
+  yaml.load_file(outname)
+}
+
+set_yaml <- function(data){
+  outstring <- as.yaml(data)
+  outfile <- file(outname)
+  writeLines(c(outstring), outfile)
+  close(outfile)
+}
+
+shinyApp(
+  ui = fluidPage(
+    textInput("name", "Name", "")
+  ),
+
+  server = function(input, output, session){
+    formData <- reactive({
+      data <- sapply(fields, function(x) input[[x]])
+      data})
+
+    observeEvent(input$name, {
+      set_yaml(formData())})
+  }  
+)
+```
