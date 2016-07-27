@@ -19,9 +19,11 @@ set_yaml <- function(data){
   close(outfile)
 }
 
+input <- get_yaml()
+
 shinyApp(
   ui = fluidPage(
-    textInput("name", "Name", "")
+    textInput("name", "Name", input["name"])
   ),
 
   server = function(input, output, session){
@@ -32,5 +34,6 @@ shinyApp(
     observeEvent(input$name, {
       set_yaml(formData())})
   }  
+
 )
 ```

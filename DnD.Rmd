@@ -3,6 +3,24 @@ runtime: shiny
 output: html_document
 ---
 ```{r, echo = FALSE}
+library(yaml)
+outname <- "DnD.yaml"
+
+fields <- c("name", "race", "HP", "")
+
+get_yaml <- function(){
+  yaml.load_file(outname)
+}
+
+set_yaml <- function(data){
+  outstring <- as.yaml(data)
+  outfile <- file(outname)
+  writeLines(c(outstring), outfile)
+  close(outfile)
+}
+
+get_yaml()
+
 shinyApp(
   ui = fluidPage(
     titlePanel("Character Name"),
