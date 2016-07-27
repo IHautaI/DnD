@@ -6,7 +6,7 @@ output: html_document
 library(yaml)
 outname <- "DnD.yaml"
 
-fields <- c("name", "race", "HP", "")
+fields <- c("name", "Str")
 
 get_yaml <- function(){
   yaml.load_file(outname)
@@ -19,14 +19,14 @@ set_yaml <- function(data){
   close(outfile)
 }
 
-get_yaml()
+init <- get_yaml()
 
 shinyApp(
   ui = fluidPage(
-    titlePanel("Character Name"),
+    titlePanel(div(textInput("name", "Character", ''))),
     sidebarLayout(
       sidebarPanel(
-        div(tags$table(tags$tr(tags$td(strong("Str")), tags$td(actionButton("StrUp", label = "+")), tags$td(actionButton("StrDown", label="-"))),
+        div(tags$table(tags$tr(tags$td(strong("Str")), tags$td(textOutput("Str")), tags$td(actionButton("StrUp", label = "+")), tags$td(actionButton("StrDown", label="-"))),
               tags$tr(tags$td(strong("Sta")), tags$td(actionButton("StaUp", label = "+")), tags$td(actionButton("StaDown", label="-"))),
               tags$tr(tags$td(strong("Dex")), tags$td(actionButton("DexUp", label = "+")), tags$td(actionButton("DexDown", label="-"))),
               tags$tr(tags$td(strong("Int")), tags$td(actionButton("IntUp", label = "+")), tags$td(actionButton("Intdown", label="-"))),
@@ -37,7 +37,13 @@ shinyApp(
       mainPanel()
     )
   ),
-  server = function(input, output){},
+  server <- function(input, output, session){
+      formData <- reactive({
+        data <- sapply(fields, function(x) input[[x]])
+        data})
+
+      eventReactive(input$StrUp, {set_yaml(formData())})
+  },
   options = list(width="100%", height="700")
   )
 ```
